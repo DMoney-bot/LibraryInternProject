@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useModal } from "@/app/Components/Modal/ModalContext";
 import Link from "next/link";
 import { login, loginAsGuest, loginWithGoogle } from "@/app/firebase/auth";
+import { FaUser } from "react-icons/fa6";
 
 export default function LoginModal() {
   const { isLoginOpen, closeLogin } = useModal();
@@ -67,6 +68,7 @@ export default function LoginModal() {
           className="btn guest__btn"
           disabled={loading}
         >
+          <FaUser className="guest__icon" size={30} color="white" />
           Login as a Guest
         </button>
         <button
@@ -75,10 +77,13 @@ export default function LoginModal() {
           className="btn googleBtn"
           disabled={loading}
         >
+          <img src="/google.png" alt="Google Icon" className="google-icon" />
           Login with Google
         </button>
         <div className="login__separator">
+          <div className="separator__line"></div>
           <span className="login__separator--text">or</span>
+          <div className="separator__line"></div>
         </div>
         <form onSubmit={handleSubmit} className="login__form">
           <input
@@ -104,6 +109,7 @@ export default function LoginModal() {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+          <button className="btn createAccountBtn">Create an Account</button>
       </div>
     </Modal>
   );

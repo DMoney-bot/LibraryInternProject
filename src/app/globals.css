@@ -172,11 +172,31 @@ button:disabled {
   font-size: 25px
 }
 
+.login__error {
+  color: red;
+}
+
 .login__wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+}
+
+.login__separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.separator__line {
+  background-color: grey;
+  opacity: 40%;
+  flex-shrink: 0;
+  width: 125px;
+  height: 1px;
 }
 
 .modal__overlay {
@@ -188,6 +208,7 @@ button:disabled {
   justify-content: center;
   z-index: 1000;
 }
+
 
 .modal__content {
   background: white;
@@ -266,6 +287,14 @@ input:focus {
   transition: filter 0.3s ease;
 }
 
+.btnLink {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  width: 100%;
+  color: inherit;
+}
+
 .temps {
   display: flex;
 }
@@ -308,11 +337,13 @@ input:focus {
 .highlightsG {
   display: flex;
   align-items: center;
+  cursor: not-allowed;
 }
 
 .searchG {
   display: flex;
   align-items: center;
+  cursor: not-allowed;
 }
 
 .settingsG {
@@ -323,11 +354,61 @@ input:focus {
 .helpG {
   display: flex;
   align-items: center;
+  cursor: not-allowed;
 }
 
 .loginG {
   display: flex;
   align-items: center;
+}
+
+.fontSizeRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 15px;
+}
+
+.fontSizeBtn {
+  color: #032b41;
+  opacity: 0.6;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.fontSizeBtn--small {
+  font-size: 14px;
+}
+.fontSizeBtn--medium {
+  font-size: 18px;
+}
+.fontSizeBtn--large {
+  font-size: 22px;
+}
+.fontSizeBtn--xlarge {
+  font-size: 26px;
+}
+
+.fontSizeBtn--active {
+  opacity: 1;
+  border-bottom-color: #2bd97c;
+}
+
+.playerPageBody--small {
+  font-size: 16px;
+}
+.playerPageBody--medium {
+  font-size: 19px;
+}
+.playerPageBody--large {
+  font-size: 22px;
+}
+.playerPageBody--xlarge {
+  font-size: 26px;
+}
+
+.playerPageText {
+  padding-bottom: 50px;
 }
 
 /* Search Bar */
@@ -355,6 +436,66 @@ input:focus {
   background-color: #f7faf9;
 }
 
+.searchDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 6px;
+  z-index: 950;
+}
+
+.searchDropdownMsg {
+  padding: 16px;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.searchResultItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.searchResultItem:hover {
+  background-color: #f1f6f4;
+}
+
+.searchResultsImg {
+  width: 40px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.searchResultText {
+  overflow: hidden;
+}
+
+.searchResultTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #032b41;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.searchResultAuthor {
+  font-size: 12px;
+  color: #6b7280;
+}
+
 .sBar {
   padding-left: 20px;
 }
@@ -366,12 +507,11 @@ input:focus {
 /* FOR YOU PAGE */
 
 .forYouPage {
-  border: 2px solid greenyellow;
   position: absolute;
   top: 80px;
   left: 240px;
-  height: 100%vh;
-  width: 100%;
+  height: 100vh;
+  width: calc(100% - 240px);
   padding: 50px 0 0 300px;
 }
 
@@ -464,6 +604,10 @@ input:focus {
   padding-top: 20px;
 }
 
+.recommendedSubtitle {
+  font-weight: 300;
+}
+
 .recommendedBookLink {
   text-decoration: none;
   color: inherit;
@@ -499,11 +643,712 @@ input:focus {
 
 .recommnededBookSubtitle {
   font-size: 15px;
+  font-weight: 300;
+  padding-bottom: 10px;
 }
 
 .timeRate {
   display: flex;
   gap: 10px;
+}
+
+.suggested {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.suggestedBookLink {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding-left: 10px;
+  padding-top: 20px;
+}
+
+.suggestedBookLink:hover {
+  background-color: #f1f6f4
+}
+
+.suggestedBooks {
+  display: flex;
+  gap: 15px;
+}
+
+.suggestedSubtitle {
+  font-size: 15px;
+  font-weight: 300;
+  padding-bottom: 10px;
+}
+
+.suggestedBookImgWrapper {
+  width: 150px;
+}
+
+.suggestedBookTitle {
+  font-weight: 700;
+  padding: 10px 0 5px 0;
+}
+
+.suggestedBookAuthor {
+  font-size: 15px;
+  font-weight: 150;
+}
+
+.suggestedBookSubtitle {
+  font-size: 15px;
+  font-weight: 300;
+  padding-bottom: 10px;
+}
+
+.premiumBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #032b41;
+}
+
+.premiumTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 10px;
+  padding: 4px 10px;
+  background-color: #ffc453;
+  color: #032b41;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.recommendedBookImgWrapper,
+.suggestedBookImgWrapper {
+  position: relative;
+}
+
+.premiumIcon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  background-color: #ffc453; 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookPlayTime {
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+.google-icon {
+  width: 30px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.googleBtn {
+  display: flex;
+  gap: 10px;
+  background-color: #3a579d;
+  color: white;
+  /* pointer-events: none; */
+}
+
+.googleBtn:hover:not(:disabled) {
+  background-color: #2c4475;
+}
+
+.guest__btn {
+  display: flex;
+  gap: 10px;
+  background-color: #4285f4;
+  color: white;
+}
+
+.guest__btn:hover:not(:disabled) {
+  background-color: #3367d6;
+}
+
+
+/* Book Page */
+
+.bookPageWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.bookPageImgWrapper {
+  flex-shrink: 0;
+  width: 300px;
+}
+
+.bookPageImgWrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.bookPageTitle {
+  font-size: 36px;
+  font-weight: bold;
+  width: 600px;
+}
+
+.bookPageAuthor {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.bookPageSubtitle {
+  font-size: 20px;
+  font-weight: 150;
+}
+
+.bookDividerH {
+  background-color: grey;
+  opacity: 20%;
+  flex-shrink: 0;
+  width: 600px;
+  height: 1px;
+}
+
+.bookHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.bookStatsItems {
+  display: grid;
+  grid-template-columns: repeat(2, 175px);
+  gap: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.bookRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bookTime {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bookType {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bookIdeas {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bookPagePlayerButton {
+  gap: 10px;
+  display: flex;
+  padding-top: 20px;
+}
+
+.bookRead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #032b41;
+  padding: 10px 40px;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.bookListen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #032b41;
+  padding: 10px 40px;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.bookLibrary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: blue;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  font-size: 20px;
+}
+
+.bookPageDescTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bookPageAuthorTitle {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.bookPageTagsWrapper {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  padding-bottom: 15px;
+}
+
+.bookPageTag {
+  padding: 10px;
+  background-color: #f1f6f4;
+  cursor: not-allowed;
+}
+
+.bookDesc {
+  width: 600px;
+  padding-bottom: 15px;
+}
+
+.authorDesc {
+  width: 600px;
+  padding-bottom: 20px;
+}
+
+/* Inner Book Page */
+
+.playerBookPageTitle {
+  font-size: 24px;
+  font-weight: bold;
+  width: 600px;
+  padding-bottom: 20px;
+}
+
+.playerPageBody {
+  width: 800px;
+  max-width: 700px;
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
+
+.playerPageParagraph {
+  margin-bottom: 20px;
+  line-height: 1.8;
+  color: #032b41;
+}
+
+.playerPageParagraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Audio Player */
+
+.playerBar {
+  position: fixed;
+  bottom: 0;
+  left: 240px;
+  right: 0;
+  height: 90px;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 900;
+}
+
+.playerBarLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.playerBarImg {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.playerBarText {
+  overflow: hidden;
+}
+
+.playerBarTitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: #032b41;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playerBarAuthor {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.playerBarCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 500px;
+  gap: 4px;
+}
+
+.playerBarButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.playerPlayButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #032b41;
+  color: white;
+}
+
+.playerSkipButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #032b41;
+}
+
+.playerSeekRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.playerTime {
+  font-size: 12px;
+  color: #6b7280;
+  min-width: 32px;
+}
+
+.playerSeekBar {
+  flex: 1;
+  cursor: pointer;
+}
+
+.playerBarRight {
+  width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.playerDuration {
+  font-size: 13px;
+  color: #032b41;
+  font-weight: 600;
+}
+
+/* Sale Page */
+
+.salePageWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.salePageHeader {
+  width: 100%;
+  background-color: #032b41;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  border-bottom: #032b41;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+  margin-bottom: 50px;
+}
+
+.salePageTitle {
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+.salePageSubtitle {
+  font-size: 20px;
+  color: white;
+  padding: 15px 15px;
+}
+
+.saleImg {
+  width: 350px;
+  border-top-left-radius: 500;
+  border-top-right-radius: 500;
+}
+
+.salePageIdeas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 80px;
+}
+
+.salePageIdea {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.salePageIdea {
+  display: flex;
+  flex-direction: column;
+}
+
+.salePageBoldTxt {
+  font-weight: 1000;
+  color: #032b41;
+}
+
+.salePagePlanTitle {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 50px;
+  color: #032b41;
+  padding-bottom: 30px;
+}
+
+.salePagePlan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.saleBox {
+  border: 4px solid #bac8ce;
+  border-radius: 5px;
+  background-color: #f1f6f4;
+  width: 800px;
+  height: 150px;
+  gap: 30px;
+  display: flex;
+}
+
+.saleBox--active {
+  border-color: #2bd97c;
+}
+
+.orSection {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.saleBoxCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #032b41;
+  border-radius: 80px;
+  width: 25px;
+  height: 25px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.saleBoxDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.separator {
+  background-color: grey;
+  opacity: 40%;
+  flex-shrink: 0;
+  width: 300px;
+  height: 1px;
+}
+
+.saleBoxTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #032b41;
+}
+
+.saleBoxContent {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.saleBoxPrice {
+  font-size: 24px;
+  font-weight: bold;
+  color: #032b41;
+}
+
+.saleBoxTrial {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.saleBoxBtn {
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.saleBoxTxt {
+  font-size: 12px;
+  opacity: 60%;
+}
+
+.salePageAccordion {
+  max-width: 1000px;
+  margin: 0 auto 100px;
+  width: 100%;
+}
+
+.accordionItem {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  text-align: left;
+}
+
+.accordionQuestion {
+  font-size: 25px;
+  font-weight: 700;
+  color: #032b41;
+}
+
+.accordionChevron {
+  color: #032b41;
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+}
+
+.accordionChevron--open {
+  transform: rotate(180deg);
+}
+
+.accordionBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 250ms ease;
+}
+
+.accordionBody--open {
+  max-height: 300px;
+}
+
+.accordionAnswer {
+  padding-bottom: 24px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #394547;
+  max-width: 950px;
+}
+
+/* Settings */
+
+.settingsTitle {
+  font-weight: bold;
+  font-size: 35px;
+  width: 1000px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.settingsSubPlan {
+  border-bottom: 1px solid #e5e7eb;
+  width: 1000px;
+  padding: 20px 0;
+}
+
+.settingsEmail {
+  width: 1000px;
+  padding: 20px 0;
+}
+
+.settingsBoxTitle {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.settingsBoxTxt {
+  font-size: 15px;
+}
+
+.settingsLoggedOut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 100px;
+  padding-right: 400px;
+}
+
+.settingsLoggedOutImg {
+  margin-bottom: 24px;
+  width: 600px;
+}
+
+.settingsLoggedOutText {
+  font-size: 18px;
+  color: #394547;
+  margin-bottom: 24px;
+}
+
+.settingsLoggedOutButton {
+  max-width: 60px;
+}
+
+.settingsLoginBtn {
+  max-width: 100px;
 }
 
 /* FEATURES */

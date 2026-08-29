@@ -4,7 +4,7 @@ import React from "react";
 export default function footer() {
   return (
     <section id="footer">
-      <div className="container">
+      <div className="page-container">
         <div className="row">
           <div className="footer__top--wrapper">
             <div className="footer__block">

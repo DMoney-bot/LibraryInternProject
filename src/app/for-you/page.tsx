@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "@/app/Components/Extras/sidebar";
 import SearchBar from "../Components/Extras/searchBar";
 import Link from "next/link";
+import { array } from "firebase/firestore/pipelines";
+import { useModal } from "../Components/Modal/ModalContext";
 
 interface Book {
   id: string;
@@ -25,7 +27,23 @@ interface Book {
 
 export default function ForYou() {
   const [book, setBook] = useState<Book | null>(null);
+  const { user } = useModal();
   const [recommendedBooks, setRecommendedBooks] = useState<Book[]>([]);
+  const [suggestedBooks, setSuggestedBooks] = useState<Book[]>([]);
+
+  useEffect(() => {
+    fetch(
+      `https://us-central1-summaristt.cloudfunctions.net/getBooks?status=suggested`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("suggested data: ", data);
+        setSuggestedBooks(Array.isArray(data) ? data : []);
+      })
+      .catch((err) => {
+        console.log("error: ", err);
+      });
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -84,6 +102,7 @@ export default function ForYou() {
                     <p className="bookAuthor">{book.author}</p>
                     <div className="bookPlayRow">
                       <div className="bookPlayButton"></div>
+                      <p className="bookPlayTime">3 mins 23 secs</p>
                     </div>
                   </div>
                 </div>
@@ -113,13 +132,29 @@ export default function ForYou() {
                         alt={recBook.title}
                         referrerPolicy="no-referrer"
                       />
+                      {recBook.subscriptionRequired && !user && (
+                        <div className="premiumIcon">
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="#fff"
+                          >
+                            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
+                          </svg>
+                        </div>
+                      )}
                     </div>
                     <h3 className="recommendedBookTitle">{recBook.title}</h3>
                     <p className="recommendedBookAuthor">{recBook.author}</p>
-                    <p className="recommnededBookSubtitle">{recBook.subTitle}</p>
+                    <p className="recommnededBookSubtitle">
+                      {recBook.subTitle}
+                    </p>
                     <div className="timeRate">
-                      <p className="recommendedTime">03:24</p>
-                      <p className="recommendedRating">☆{recBook.averageRating}</p>
+                      <p className="recommendedTime">03:30</p>
+                      <p className="recommendedRating">
+                        ☆{recBook.averageRating}
+                      </p>
                     </div>
                   </Link>
                 ))
@@ -136,7 +171,42 @@ export default function ForYou() {
           </div>
           <div className="suggestedBooksWrapper">
             <div className="suggestedBooks">
-              
+              {suggestedBooks.slice(0, 5).map((suggBook) => (
+                <Link
+                  key={suggBook.id}
+                  href={`/book/${suggBook.id}`}
+                  className="suggestedBookLink"
+                >
+                  <div className="suggestedBookImgWrapper">
+                    <img
+                      src={suggBook.imageLink}
+                      alt={suggBook.title}
+                      referrerPolicy="no-referrer"
+                    />
+                    {suggBook.subscriptionRequired && !user && (
+                      <div className="premiumIcon">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="#fff"
+                        >
+                          <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="suggestedBookTitle">{suggBook.title}</h3>
+                  <p className="suggestedBookAuthor">{suggBook.author}</p>
+                  <p className="suggestedBookSubtitle">{suggBook.subTitle}</p>
+                  <div className="timeRate">
+                    <p className="recommendedTime">04:22</p>
+                    <p className="recommendedRating">
+                      ☆{suggBook.averageRating}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
