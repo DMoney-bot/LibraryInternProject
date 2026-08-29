@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "bookstore-app",
   "version": "0.1.0",
   "private": true,
@@ -23,5 +24,10 @@
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",
     "typescript": "^5"
+=======
+  "dependencies": {
+    "firebase": "^12.16.0",
+    "react-icons": "^5.7.0"
+>>>>>>> 997c27cccd699e1c72050fbbf932903b87295a5c
   }
 }
