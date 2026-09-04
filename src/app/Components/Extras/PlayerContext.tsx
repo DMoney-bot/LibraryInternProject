@@ -1,5 +1,4 @@
 "use client"
-import React from 'react'
 import React, { createContext, useContext, useState } from "react";
 
 interface PlayerBook {
@@ -9,7 +8,7 @@ interface PlayerBook {
     audioLink: string;
 }
 
-interface PlayerBookType {
+interface PlayerContextType {
     currentBook: PlayerBook | null;
     playBook: (book: PlayerBook) => void;
 }
@@ -31,7 +30,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
 export function usePlayer() {
     const context = useContext(PlayerContext)
-    if(!useContext){
+    if(!context){
         throw new Error("usePlayer must be used within PlayerProvider")
     }
     return context;
