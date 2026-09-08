@@ -1,11 +1,21 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Modal from "./Modal";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/app/Components/Modal/ModalContext";
-import Link from "next/link";
 import { login, loginAsGuest, loginWithGoogle } from "@/app/firebase/auth";
 import { FaUser } from "react-icons/fa6";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/app/firebase/firebase";
+
+export const signup = async (email, password) => {
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+  return userCredential.user;
+};
 
 export default function LoginModal() {
   const { isLoginOpen, closeLogin } = useModal();
@@ -14,13 +24,18 @@ export default function LoginModal() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
     try {
-      await login(email, password);
+      if (isSignup) {
+        await signup(email, password)
+      } else {
+        await login(email, password)
+      }
       closeLogin();
       router.push("/for-you");
     } catch (err) {
@@ -61,7 +76,7 @@ export default function LoginModal() {
   return (
     <Modal isOpen={isLoginOpen} onClose={closeLogin}>
       <div className="login__wrapper">
-        <div className="login__title">Login to Summarist</div>
+        <div className="login__title">{isSignup ? "Create an Account" : "Login to Summarist"}</div>
         <button
           type="button"
           onClick={handleGuestLogin}
@@ -109,7 +124,16 @@ export default function LoginModal() {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-          <button className="btn createAccountBtn">Create an Account</button>
+        <button
+          type="button"
+          className="btn createAccountBtn"
+          onClick={() => {
+            setError("");
+            setIsSignup((prev) => !prev);
+          }}
+        >
+          {isSignup ? "Back to Login" : "Create an Account"}
+        </button>
       </div>
     </Modal>
   );
@@ -123,6 +147,10 @@ function getFriendlyError(code) {
     case "auth/wrong-password":
     case "auth/invalid-credential":
       return "Incorrect email or password.";
+    case "auth/email-already-in-use":
+      return "An account with this email already exists.";
+    case "auth/weak-password":
+      return "Password should be at least 6 characters.";
     default:
       return "Something went wrong. Please try again.";
   }

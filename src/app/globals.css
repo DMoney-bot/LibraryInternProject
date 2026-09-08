@@ -308,6 +308,10 @@ input:focus {
   padding-left: 10px;
 }
 
+.libBtn {
+  cursor: not-allowed;
+}
+
 .searchbarTop {
   display: flex;
   flex-direction: column;

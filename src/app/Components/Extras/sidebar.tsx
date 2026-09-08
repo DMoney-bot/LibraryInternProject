@@ -53,11 +53,9 @@ export default function sidebar() {
             <p className="btnTxt">For You</p>
           </Link>
         </button>
-        <button className="libraryG sidebarBtn">
-          <Link href="/my-library" className="btnLink">
-            <FaBookmark />
-            <p className="btnTxt">My Library</p>
-          </Link>
+        <button className="libraryG sidebarBtn btnLink libBtn">
+          <FaBookmark />
+          <p className="btnTxt">My Library</p>
         </button>
         <button className="highlightsG sidebarBtn">
           <FaPenClip />
